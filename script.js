@@ -1,99 +1,83 @@
-let idd;
+let add=document.getElementById("add");
+var GiveValue;
 var Empty=[];
-let FindId;
 var Count=1;
-var Qut;
-Qut=Count;
-var Products = [
-    {id:1,Name:"Iphone",Price:50000,Ram:"4GB"},
-    {id:2,Name:"Samsung",Price:40000,Ram:"4GB"},
-    {id:3,Name:"Oppo",Price:35000,Ram:"4GB"},
-    {id:4,Name:"Vivo",Price:30000,Ram:"4GB"}
-]
-let select=function(){
-idd =0;
-  idd+=parseInt(prompt("Give Value"));
-  // console.log(idd);
-//  document.getElementById("show").style.display="block"
-    Callback(idd);
- }
- function Callback(idd){
-    Qut=Count;
-  FindId=Products.find(find=>find.id === idd);
-
-  if(Empty.find(obj=> obj.id === idd)){
-    Empty.find(find => {
-       if(find.id === idd){
-        find.Qut++
-        console.log("flag");
-       }
-    }); 
+var Qt;
+var Data = [{Id:1,Brand:"Iphone",Prices:50000},{Id:2,Brand:"Samsung",Prices:40000},{Id:3,Brand:"Vivo",Prices:30000},{Id:4,Brand:"Oppo",Prices:25000}]
+function aDDToCard(){
+  GiveValue = parseInt(prompt("Give the Id Value Of Items"));
+  var FindId = Data.find(find => find.Id === GiveValue);
+  var EmptyFind = Empty.some(some => some.Id === GiveValue);
+  if(EmptyFind){
+        Empty.find(find  =>{ 
+          if(find.Id === GiveValue){
+            find.Qt++
+          }
+         } );
+      
   }else{
     if(FindId){
-        Empty.push({...FindId,Qut:Count});
-        // console.log("hello");
-       
+        Empty.push({...FindId,Qt:Count})
     }else{
-        console.log("Easy");
+      console.log("Please Give Valid Id");
     }
-  
-   
   }
- 
   console.log(Empty);
- }
- document.getElementById("add").addEventListener("click",function(){
-  select()
-});
-let Input=document.getElementById("Easy").value;
-// console.log(Input);
-function Remo(){
-  let INput=parseInt(prompt("GIVE"));
-  let FindREmove = Empty.find(find => find.id === INput);
-   if(FindREmove){
-      if(Empty.some(some => some.id === INput)){
-          Empty.find(find => {find.Qut--
-
-            if(find.Qut <= 0){
-              let Wow = Empty.findIndex(item => item.id === INput);
-              console.log(Wow);
-               Empty.splice(Wow,1)
-             }
-          
-          });
-      }
-   }
-   console.log(Empty);
 }
-let Remove=document.getElementById("remove");
-Remove.addEventListener("click",function(){
- Remo()
-})
+add.addEventListener("click",aDDToCard);
 
-document.getElementById("show").addEventListener("click",function(){
-  let Ii=parseInt(prompt("GIVE"));
-  let FindREmov = Empty.find(find => find.id === Ii);
-  console.log(FindREmov); 
-   if(FindREmov){
-      if(Empty.some(some => some.id === Ii)){
-        Empty.find((find) => {find.Qut++})
+
+let incr = document.getElementById("increase");
+
+function increase(){
+  GiveValue = parseInt(prompt("Give the Id Value Of Items"));
+  FindId = Data.find(find => find.Id === GiveValue);
+  if(FindId){
+    Empty.find(find  =>{ 
+      if(find.Id === GiveValue){
+        find.Qt++
       }
-      console.log(Empty)
-    }
-    }
-          
-)
-document.getElementById("del").addEventListener("click",function(){
-  let del=parseInt(prompt("del"));
-  let FindREmove = Empty.find(find => find.id === del);
-  if(FindREmove){
-    let dele= Empty.findIndex(find => find.id === del);
-    Empty.splice(dele,1);
-    console.log(Empty)
+     } );
   }
-})
+  console.log(Empty);
+}
+incr.addEventListener("click",increase);
+let decr = document.getElementById("decrease");
 
-
+function decrease(){
+  GiveValue = parseInt(prompt("Give the Id Value Of Items"));
+  FindId = Empty.find(find => find.Id === GiveValue);
+  ind = Empty.findIndex(ind => ind === GiveValue)
+  console.log(ind);
+  if(FindId){
+    Empty.find(find  =>{ 
+      if(find.Id === GiveValue){
+        find.Qt--
+        
+        if(find.Qt === 0){
+         Empty.splice(ind,1);
+        
+        }
+      }
+     } );
+}
+console.log(Empty);
+}
+decr.addEventListener("click",decrease);
+let Delete = document.getElementById("delete");
+function Del(){
+  GiveValue = parseInt(prompt("Give the Id Value Of Items"));
+  FindId = Empty.find(find => find.Id === GiveValue);
+  
+  if(FindId){
+    ind = Empty.findIndex(ind => ind.Id === GiveValue);
+    console.log(ind);
+    Empty.splice(ind,1)
+   
+}
+console.log(Empty);
+}
+Delete.addEventListener("click",Del)
 
  
 
